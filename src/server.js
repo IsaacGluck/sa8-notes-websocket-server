@@ -77,4 +77,18 @@ io.on('connection', (socket) => {
       socket.emit('error', 'create failed');
     });
   });
+
+  // on update note do what is needful
+  socket.on('updateNote', (id, fields) => {
+    Notes.updateNote(id, fields).then(() => {
+      pushNotes();
+    });
+  });
+
+  // on deleteNote do what is needful
+  socket.on('deleteNote', (id) => {
+    Notes.deleteNote(id).then(() => {
+      pushNotes();
+    });
+  });
 });
